@@ -8,6 +8,3 @@ from repo.auth_repo import AuthRepo
 
 def get_auth_repo(db:Annotated[AsyncSession,Depends(get_db)]):
     return AuthRepo(db)
-
-def get_expense_repo(db:Annotated[AsyncSession,Depends(get_db)]):
-    return ExpenseRepo(db)
