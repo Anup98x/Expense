@@ -25,7 +25,7 @@ class Expense(Base): #this Base makes class a database table
     id:Mapped[uuid.UUID]=mapped_column(UUID(as_uuid=True),
     primary_key=True,default=uuid.uuid4() #it creates random id number for expenses
     )
-    title:Mapped[str] #mapped column is used for extra settings of column
+    title:Mapped[str] #mapped column is used for extra setting of column
     description:Mapped[str | None]
     amount:Mapped[float]
     created_at:Mapped[datetime]=mapped_column(default=datetime.utcnow)
