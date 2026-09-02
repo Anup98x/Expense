@@ -1,5 +1,7 @@
 
 
+from os import access
+
 from fastapi.requests import Request
 from typing import Annotated
 
@@ -39,3 +41,6 @@ async def logout_user_endpoint():
     response=JSONResponse(status_code=200,content="user logout successfully")
     response.delete_cookie("refresh")
     return response
+
+@auth_api.get("expense")
+async def expense_user_endpoint(data:access):
