@@ -1,6 +1,8 @@
 
 from unicodedata import category
+from uuid import UUID
 
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from model.expense import Expense
@@ -26,3 +28,7 @@ class ExpenseRepo:
         self.session.add(new)
         await self.session.commit()
         return new
+    async def get_expense_by_id(self,expense_id:UUID):
+        query=select(Expense).where(Expense.id==expense_id)
+        expense=(await self.session.execute(query)).scalar_one_or_none()
+        return expense
