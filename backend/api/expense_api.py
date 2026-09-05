@@ -20,5 +20,5 @@ async def create_expense_endpoint(data:ExpenseCreate,service:Annotated[ExpenseSe
     return "Expense created successfully"
 @expense_api.get("/{expense_id}",response_model=SingleExpense) #expense_id is the path parameter and response model is used to validate the row
 async def get_single_expense_endpoint(expense_id:UUID,service:Annotated[ExpenseService,Depends(get_expense_service)]):
-    expense=await service.get_single_expense(expense_id)
-    return expense
+    expenses=await service.get_single_expense(expense_id)
+    return expenses

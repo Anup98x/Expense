@@ -22,7 +22,7 @@ class ExpenseService:
          new_expense=await self.repo.create_expense(data)
          return new_expense
     async def get_single_expense(self,expense_id:UUID):
-        expense=await self.repo.get_expense_by_id(expense_id)
-        if not expense:
+        expenses=await self.repo.get_expense_by_id(expense_id)
+        if not expenses:
             raise HTTPException(status_code=404,detail="expense not found")
-        return expense
+        return expenses
