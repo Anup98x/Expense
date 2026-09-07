@@ -3,6 +3,7 @@ from uuid import UUID
 
 from fastapi import HTTPException
 
+from model.user import User
 from repo.expense_repo import ExpenseRepo
 from schema.expense_schema import ExpenseCreate
 
@@ -12,9 +13,10 @@ class ExpenseService:
         self.repo=repo
     async def create_expense_service(
             self,
-            data:ExpenseCreate
+            data:ExpenseCreate,
+            user:User
     ):
-         new_expense=await self.repo.create_expense(data)
+         new_expense=await self.repo.create_expense(data,user.id)
          return new_expense
     async def get_single_expense(self,expense_id:UUID):
         expenses=await self.repo.get_expense_by_id(expense_id)
@@ -23,6 +25,6 @@ class ExpenseService:
         return expenses
 
 
-    async def get_expenses(self):
-            expenses=await self.repo.get_all_expense()
+    async def get_expenses(self,user:User):
+            expenses=await self.repo.get_all_expense(user)
             return expenses

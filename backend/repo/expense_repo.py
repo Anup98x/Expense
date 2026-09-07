@@ -6,7 +6,9 @@ from uuid import UUID
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from model import expense
 from model.expense import Expense
+from model.user import User
 from schema.expense_schema import ExpenseCreate
 
 
@@ -16,14 +18,17 @@ class ExpenseRepo:
 
     async def create_expense(
             self,
-            data:ExpenseCreate
+            data:ExpenseCreate,
+            user_id:UUID
+
     ):
         new=Expense(
             title=data.title,
             description=data.description,
             amount=data.amount,
             created_at=data.created_at,
-            category=data.category
+            category=data.category,
+            user_id=user_id
 
         )
         self.session.add(new)
@@ -35,8 +40,6 @@ class ExpenseRepo:
         return expense
 
     #creating for read endpoint
-    async def get_all_expense(self):
-        query=select(Expense)
-        result=await self.session.execute(query)
-        expenses=result.scalars().all()
+    async def get_all_expense(self,user:User):
+        expenses=(await self.session.execute(select(Expense).where(Expense.user==user))).scalars().all()
         return expenses
