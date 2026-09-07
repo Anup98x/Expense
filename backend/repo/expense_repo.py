@@ -1,5 +1,6 @@
 
 from unicodedata import category
+from unittest import result
 from uuid import UUID
 
 from sqlalchemy import select
@@ -32,3 +33,10 @@ class ExpenseRepo:
         query=select(Expense).where(Expense.id==expense_id)
         expense=(await self.session.execute(query)).scalar_one_or_none()
         return expense
+
+    #creating for read endpoint
+    async def get_all_expense(self):
+        query=select(Expense)
+        result=await self.session.execute(query)
+        expenses=result.scalars().all()
+        return expenses
