@@ -23,7 +23,7 @@ async def get_single_expense_endpoint(expense_id:UUID,service:Annotated[ExpenseS
     expenses=await service.get_single_expense(expense_id) #we are doing this bcz when we want to save the expense we create on frontend also in the backend using expense id as primary key
     return expenses
 
-@expense_api.get("/")
+@expense_api.get("/",response_model=list[SingleExpense]) #list helps to give list of the rows
 async def get_expense_endpoints(service:Annotated[ExpenseService,Depends(get_expense_service)]):
     expenses=await service.get_expenses()
     return expenses
