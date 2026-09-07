@@ -21,3 +21,8 @@ class ExpenseService:
         if not expenses:
             raise HTTPException(status_code=404,detail="expense not found")
         return expenses
+
+
+    async def get_expenses(self):
+            expenses=await self.repo.get_all_expense()
+            return expenses
