@@ -23,7 +23,7 @@ async def create_expense_endpoint(data:ExpenseCreate,service:Annotated[ExpenseSe
 @expense_api.get("/{expense_id}",response_model=SingleExpense) #expense_id is the path parameter and response model is used to validate row
 async def get_single_expense_endpoint(expense_id:UUID,service:Annotated[ExpenseService,Depends(get_expense_service)],user:Annotated[User,Depends(get_user)]
     ):
-    expenses=await service.get_single_expense(expense_id) #we are doing this bcz when we want to save the expense we create on frontend also in the backend using expense id as primary key
+    expenses=await service.get_single_expense(expense_id) #we are doing this bcz when we want to save the expense we create on frontend also in the backend using expense id as primary key so thats why
 
     return expenses
 
