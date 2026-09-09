@@ -27,7 +27,7 @@ async def get_single_expense_endpoint(expense_id:UUID,service:Annotated[ExpenseS
 
     return expenses
 
-@expense_api.get("/",response_model=list[SingleExpense]) #list helps to give list of the rowss
+@expense_api.get("/",response_model=list[SingleExpense]) #list helps to give list of the rowss it is used when user logins and see their expense
 async def get_expense_read_endpoints(service:Annotated[ExpenseService,Depends(get_expense_service)],user:Annotated[User,Depends(get_user)]):
     expenses=await service.get_expenses(user)
     return expenses
