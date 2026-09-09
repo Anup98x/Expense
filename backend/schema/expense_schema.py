@@ -1,10 +1,6 @@
 
 
-
-
-
-
-
+from typing import Optional
 from datetime import datetime
 from enum import Enum
 from uuid import UUID
@@ -26,3 +22,10 @@ class ExpenseCreate(BaseModel): # Basemodel tells to python to verify the data i
 class SingleExpense(ExpenseCreate):
     id:UUID
     model_config=ConfigDict(from_attributes=True)
+
+class UpdateExpense(BaseModel):  # BaseModel is used for  API data validation / request & response data(like wrong data dina milena i.e amount:"hello" yesto milena)
+    title: Optional[str] = None
+    amount: Optional[float]=None
+    description: Optional[float]=None
+    category: Optional[str]=None
+# writing optional because user only sends/edit what they want to change
