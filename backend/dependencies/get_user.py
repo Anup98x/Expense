@@ -14,9 +14,13 @@ from model.user import User
 
 async def get_user(
     request: Request,
-    token: Annotated[str, Depends(OAuth2PasswordBearer(tokenUrl="/login"))],
+    # token: Annotated[str, Depends(OAuth2PasswordBearer(tokenUrl="/login"))],
+
     db: Annotated[AsyncSession, Depends(get_db)],
 ):
+    token=request.cookies.get("refresh",None)
+    if not token:
+        raise HTTPException(status_code=401,detail="Token not found")
     payload = SecurityService().decode_token(token)
     user_id=payload.get("user_id",None)
     if not user_id:

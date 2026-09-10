@@ -25,7 +25,6 @@ async def register_user_endpoint(data:RegisterCreate,service:Annotated[AuthServi
 async def login_user_endpoint(data:LoginUser,service:Annotated[AuthService,Depends(get_auth_service)]):
     return await service.Login_service(data)
 oauth=OAuth2PasswordBearer(tokenUrl="/auth/login")
-
 @auth_api.get("/me",response_model=UserResponse)
 async def get_user_endpoint(token:Annotated[str,Depends(oauth
 )],service:Annotated[AuthService,Depends(get_auth_service)]):
