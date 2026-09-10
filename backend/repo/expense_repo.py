@@ -51,3 +51,4 @@ class ExpenseRepo:
     async def delete_expense(self,expense:Expense):
 
         await self.session.delete(expense)
+        await self.session.commit()
