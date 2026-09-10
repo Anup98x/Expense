@@ -2,10 +2,9 @@
 from uuid import UUID
 
 from fastapi import HTTPException
-from
 from model.user import User
 from repo.expense_repo import ExpenseRepo
-from schema.expense_schema import ExpenseCreate
+from schema.expense_schema import ExpenseCreate, UpdateExpense
 
 
 class ExpenseService:
@@ -32,9 +31,10 @@ class ExpenseService:
     async def update_expense_service(
               self,
               expense_id:UUID,
-              data:ExpenseCreate,
+              data:UpdateExpense,
               user:User
               ):
          expense=await self.repo.get_expense_by_id(expense_id) #fetching id
          if not expense or expense.user_id!=user.id:
               raise HTTPException(status_code=400,detail="Expense not found")
+         await self.repo.update_expense(expense,data) #it updates the row

@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from model import expense
 from model.expense import Expense
 from model.user import User
-from schema.expense_schema import ExpenseCreate
+from schema.expense_schema import ExpenseCreate, UpdateExpense
 
 
 class ExpenseRepo:
@@ -43,3 +43,8 @@ class ExpenseRepo:
     async def get_all_expense(self,user:User):
         expenses=(await self.session.execute(select(Expense).where(Expense.user==user))).scalars().all()
         return expenses
+    async def update_expense(self,expense:Expense,data:UpdateExpense):
+        for key,value in data.model_dump(exclude_unset=True).items():
+            setattr(expense,key,value)
+        self.session.add(expense)
+        await self.session.commit()
