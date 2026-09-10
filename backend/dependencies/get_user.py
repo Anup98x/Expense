@@ -11,7 +11,7 @@ from core.db import get_db
 from core.security import SecurityService
 from model.user import User
 
-
+#it is used to protect the endpoints and it decodes the token and gives user row for any endpoint that is using this dependencies
 async def get_user(
     request: Request,
     # token: Annotated[str, Depends(OAuth2PasswordBearer(tokenUrl="/login"))],
