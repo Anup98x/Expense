@@ -41,3 +41,11 @@ async def update_expense_endpoint(
 ):
     await service.update_expense_service(expense_id, data, user)
     return "Expense updated successfully"
+@expense_api.delete("/{expense_id}")
+async def delete_expense_endpoint(
+    expense_id: UUID,
+    service: Annotated[ExpenseService, Depends(get_expense_service)],
+    user: Annotated[User, Depends(get_user)]
+):
+    await service.delete_expense_service(expense_id,  user)
+    return "Expense deleted successfully"

@@ -38,3 +38,12 @@ class ExpenseService:
          if not expense or expense.user_id!=user.id:
               raise HTTPException(status_code=400,detail="Expense not found")
          await self.repo.update_expense(expense,data) #it updates the row
+    async def delete_expense_service(
+              self,
+              expense_id:UUID,
+              user:User
+              ):
+         expense=await self.repo.get_expense_by_id(expense_id) #fetching id
+         if not expense or expense.user_id!=user.id:
+             return
+         await self.repo.delete_expense(expense) #it  the row

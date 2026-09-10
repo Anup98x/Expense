@@ -48,3 +48,6 @@ class ExpenseRepo:
             setattr(expense,key,value)
         self.session.add(expense)
         await self.session.commit()
+    async def delete_expense(self,expense:Expense):
+
+        await self.session.delete(expense)
