@@ -20,7 +20,7 @@ async def get_user(
 ):
     token=request.cookies.get("refresh",None)
     if not token:
-        raise HTTPException(status_code=401,detail="Token not")
+        raise HTTPException(status_code=401,detail="Token not found")
     payload = SecurityService().decode_token(token)
     user_id=payload.get("user_id",None)
     if not user_id:
