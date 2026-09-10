@@ -26,6 +26,6 @@ class SingleExpense(ExpenseCreate):
 class UpdateExpense(BaseModel):  # BaseModel is used for  API data validation / request & response data(like wrong data dina milena i.e amount:"hello" yesto milena)
     title: Optional[str] = None
     amount: Optional[float]=None
-    description: Optional[float]=None
+    description: Optional[str]=None
     category: Optional[str]=None
 # writing optional because user only sends/edit what they want to change
