@@ -2,7 +2,7 @@
 from uuid import UUID
 
 from fastapi import HTTPException
-
+from
 from model.user import User
 from repo.expense_repo import ExpenseRepo
 from schema.expense_schema import ExpenseCreate
@@ -28,3 +28,13 @@ class ExpenseService:
     async def get_expenses(self,user:User):
             expenses=await self.repo.get_all_expense(user)
             return expenses
+
+    async def update_expense_service(
+              self,
+              expense_id:UUID,
+              data:ExpenseCreate,
+              user:User
+              ):
+         expense=await self.repo.get_expense_by_id(expense_id) #fetching id
+         if not expense or expense.user_id!=user.id:
+              raise HTTPException(status_code=400,detail="Expense not found")
