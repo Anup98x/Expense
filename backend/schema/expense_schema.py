@@ -27,5 +27,5 @@ class UpdateExpense(BaseModel):  # BaseModel is used for  API data validation / 
     title: Optional[str] = None
     amount: Optional[float]=None
     description: Optional[str]=None
-    category: Optional[str]=None
+    category: Optional[CategoryEnum]=None
 # writing optional because user only sends/edit what they want to change

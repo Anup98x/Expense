@@ -14,7 +14,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from core.db import Base
 from model.user import User
-class CategoryEnum(Enum):
+class CategoryEnum(Enum): #ENUM is used to make any field to have a fixed value
     TREK="trek"
     FUEL="fuel"
     PERSONAL="personal"
