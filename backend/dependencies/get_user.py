@@ -20,11 +20,11 @@ async def get_user(
 ):
     token=request.cookies.get("refresh",None)
     if not token:
-        raise HTTPException(status_code=401,detail="Token not found")
+        raise HTTPException(status_code=401,detail="Token not")
     payload = SecurityService().decode_token(token)
     user_id=payload.get("user_id",None)
     if not user_id:
-        raise HTTPException(status_code=400,detail="User not found")
+        raise HTTPException(status_code=400,detail="User id not found")
     user=(await db.execute(select(User).where(User.id==UUID(user_id)))).scalar_one_or_none()
     if not user:
          raise HTTPException(status_code=400,detail="User not found")
