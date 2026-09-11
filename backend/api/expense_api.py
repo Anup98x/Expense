@@ -47,5 +47,6 @@ async def delete_expense_endpoint(
     service: Annotated[ExpenseService, Depends(get_expense_service)],
     user: Annotated[User, Depends(get_user)]
 ):
+    #this is the endpoint api
     await service.delete_expense_service(expense_id,  user)
     return "Expense deleted successfully"
