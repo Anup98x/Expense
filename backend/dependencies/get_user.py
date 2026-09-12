@@ -14,7 +14,7 @@ from model.user import User
 #it is used to protect the endpoints and it decodes the token and gives user row for any endpoints that is using this dependencies
 async def get_user(
     request: Request,
-    # token: Annotated[str, Depends(OAuth2PasswordBearer(tokenUrl="/login"))], Annotated means the type of data
+    # token: Annotated[str, Depends(OAuth2PasswordBearer(tokenUrl="/login"))], Annotated means the type of data:
 
     db: Annotated[AsyncSession, Depends(get_db)],
 ):
