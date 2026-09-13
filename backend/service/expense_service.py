@@ -46,4 +46,4 @@ class ExpenseService:
          expense=await self.repo.get_expense_by_id(expense_id) #fetching id
          if not expense or expense.user_id!=user.id:
              return
-         await self.repo.delete_expense(expense) #it  the row
+         await self.repo.delete_expense(expense) #it  deletes the whole row
