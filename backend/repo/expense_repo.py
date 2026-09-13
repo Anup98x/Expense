@@ -51,6 +51,8 @@ class ExpenseRepo:
         query = select(Expense).where(Expense.user_id==user.id)
         if category is not None: #means if category is available in expense
             query=query.select(Expense.category==category)
+        if max_amount is not None:
+            query=query.select(Expense.amount<=max_amount) #filter garda max amount 50k amount entered then the results must be expenses less than 50k thats why
         expenses=(await self.session.execute(select(Expense).where(Expense.user==user))).scalars().all()
         return expenses
     async def update_expense(self,expense:Expense,data:UpdateExpense):
