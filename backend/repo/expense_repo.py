@@ -3,7 +3,7 @@ from unicodedata import category
 from unittest import result
 from uuid import UUID
 from model.expense import CategoryEnum
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime
 from model import expense
@@ -50,11 +50,28 @@ class ExpenseRepo:
     page_size: int = 10,):
         query = select(Expense).where(Expense.user_id==user.id)
         if category is not None: #means if category is available in expense
-            query=query.select(Expense.category==category)
+            query=query.where(Expense.category==category)
         if max_amount is not None:
-            query=query.select(Expense.amount<=max_amount) #filter garda max amount 50k amount entered then the results must be expenses less than 50k thats why
-        expenses=(await self.session.execute(select(Expense).where(Expense.user==user))).scalars().all()
-        return expenses
+            query=query.where(Expense.amount<=max_amount) #filter garda max amount 50k amount entered then the results must be expenses less than 50k thats why
+        if min_amount is not None:
+            query = query.where(Expense.amount >= min_amount)
+        if start_date is not None:
+            query = query.where(Expense.created_at >= start_date)#start date means searched date while filtering and created at means the expense we created
+        if end_date is not None:
+            query = query.where(Expense.created_at <= end_date)
+ # count matching rows BEFORE paging, so the client knows total pages
+        count_query = select(func.count()).select_from(query.subquery())
+        total = (await self.session.execute(count_query)).scalar_one()
+
+        query = (
+        query.order_by(Expense.created_at.desc())
+        .offset((page - 1) * page_size)
+        .limit(page_size)
+    )
+        expenses = (await self.session.execute(query)).scalars().all()
+
+        return expenses, total
+
     async def update_expense(self,expense:Expense,data:UpdateExpense):
         for key,value in data.model_dump(exclude_unset=True).items():
             setattr(expense,key,value)
