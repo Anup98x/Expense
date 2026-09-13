@@ -5,7 +5,7 @@ from uuid import UUID
 from model.expense import CategoryEnum
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
+from datetime import datetime
 from model import expense
 from model.expense import Expense
 from model.user import User
@@ -41,7 +41,6 @@ class ExpenseRepo:
 
     #creating for read endpoint
     async def get_all_expense(self,user:User,
-    user: User,
     category: CategoryEnum | None = None,
     min_amount: float | None = None,
     max_amount: float | None = None,
