@@ -48,6 +48,9 @@ class ExpenseRepo:
     end_date: datetime | None = None,
     page: int = 1,
     page_size: int = 10,):
+        query = select(Expense).where(Expense.user_id==user.id)
+        if category is not None: #means if category is available in expense
+            query=query.select(Expense.category==category)
         expenses=(await self.session.execute(select(Expense).where(Expense.user==user))).scalars().all()
         return expenses
     async def update_expense(self,expense:Expense,data:UpdateExpense):
