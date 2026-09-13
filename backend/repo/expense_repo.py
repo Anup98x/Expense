@@ -2,7 +2,7 @@
 from unicodedata import category
 from unittest import result
 from uuid import UUID
-
+from model.expense import CategoryEnum
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -40,7 +40,15 @@ class ExpenseRepo:
         return expense
 
     #creating for read endpoint
-    async def get_all_expense(self,user:User):
+    async def get_all_expense(self,user:User,
+    user: User,
+    category: CategoryEnum | None = None,
+    min_amount: float | None = None,
+    max_amount: float | None = None,
+    start_date: datetime | None = None,
+    end_date: datetime | None = None,
+    page: int = 1,
+    page_size: int = 10,):
         expenses=(await self.session.execute(select(Expense).where(Expense.user==user))).scalars().all()
         return expenses
     async def update_expense(self,expense:Expense,data:UpdateExpense):
