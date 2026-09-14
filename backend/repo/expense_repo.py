@@ -60,7 +60,11 @@ class ExpenseRepo:
         if end_date is not None:
             query = query.where(Expense.created_at <= end_date)
  # count matching rows BEFORE paging, so the client knows total pages
-        count_query = select(func.count()).select_from(query.subquery())
+        count_query = select(func.count()).select_from(query.subquery()) #asks the database:"How many expenses are there in total that match my current query?"
+        # query → find matching expenses
+        # subquery() → treat those results like a temporary table
+        # count() → count them
+
         total = (await self.session.execute(count_query)).scalar_one()
 
         query = (
