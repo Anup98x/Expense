@@ -76,7 +76,8 @@ class ExpenseRepo:
         expenses = (await self.session.execute(query)).scalars().all() #.scalar_one() extracts that single value.i.e 47
         #Executes the actual expense query
 
-        return expenses, total
+        return expenses, total # we also retunrs total becuase the frontend needs to know how many expenses exits
+    # 47/10= 4.7~5 so There are 47 expenses, 10 per page, so I need to show 5 pages."
 
     async def update_expense(self,expense:Expense,data:UpdateExpense):
         for key,value in data.model_dump(exclude_unset=True).items():

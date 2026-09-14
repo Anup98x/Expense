@@ -29,3 +29,9 @@ class UpdateExpense(BaseModel):  # BaseModel is used for  API data validation / 
     description: Optional[str]=None
     category: Optional[CategoryEnum]=None
 # writing optional because user only sends/edit what they want to change
+
+class PaginatedExpenses(BaseModel):
+    total:int
+    page:int
+    page_size:int
+    items:list[SingleExpense]

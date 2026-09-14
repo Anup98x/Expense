@@ -1,6 +1,8 @@
 
 from uuid import UUID
-
+from model.expense import CategoryEnum
+from datetime import datetime
+from schema.expense_schema import PaginatedExpenses
 from fastapi import HTTPException
 from model.user import User
 from repo.expense_repo import ExpenseRepo
@@ -24,11 +26,35 @@ class ExpenseService:
         return expenses
 
 
-    async def get_expenses(self,user:User):
-            expenses=await self.repo.get_all_expense(user)
-            return expenses
+    async def get_expenses(
+        self,
+        user: User,
+        category: CategoryEnum | None = None,
+        min_amount: float | None = None,
+        max_amount: float | None = None,
+        start_date: datetime | None = None,
+        end_date: datetime | None = None,
+        page: int = 1,
+        page_size: int = 10,
+    ):
+        expenses, total = await self.repo.get_all_expense(
+        user=user,
+        category=category,
+        min_amount=min_amount,
+        max_amount=max_amount,
+        start_date=start_date,
+        end_date=end_date,
+        page=page,
+        page_size=page_size,
+    )
+        return PaginatedExpenses(
+        total=total,
+        page=page,
+        page_size=page_size,
+        items=expenses,
+    )
 
-    async def update_expense_service(
+        async def update_expense_service(
               self,
               expense_id:UUID,
               data:UpdateExpense,
