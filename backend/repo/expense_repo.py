@@ -65,14 +65,16 @@ class ExpenseRepo:
         # subquery() → treat those results like a temporary table
         # count() → count them
 
-        total = (await self.session.execute(count_query)).scalar_one()
-
+        total = (await self.session.execute(count_query)).scalar_one() #The database executes the count.i.e total=47
+        #Now applying pagination
         query = (
-        query.order_by(Expense.created_at.desc())
-        .offset((page - 1) * page_size)
-        .limit(page_size)
+        query.order_by(Expense.created_at.desc()) #order_by():Show the newest expenses first.i.e 47-> newest expense,1->oldest expense
+        #desc()->it means descending order i.e 47,46,...1
+        .offset((page - 1) * page_size) #skips the rows before giving result i.e page=2,page_size=10 then (2-1)*10=10 so it means skip first 10 expense
+        .limit(page_size) #limits the size i.e pagesize=10 then give me maximum 10 responses
     )
-        expenses = (await self.session.execute(query)).scalars().all()
+        expenses = (await self.session.execute(query)).scalars().all() #.scalar_one() extracts that single value.i.e 47
+        #Executes the actual expense query
 
         return expenses, total
 
