@@ -6,7 +6,7 @@
 from datetime import datetime
 from typing import Annotated
 from uuid import UUID
-from backend.model.expense import CategoryEnum
+from model.expense import CategoryEnum
 from service.expense_service import UpdateExpense
 from fastapi import APIRouter, Depends, Query
 
