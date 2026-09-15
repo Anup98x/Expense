@@ -5,7 +5,7 @@
 
 from typing import Annotated
 from uuid import UUID
-
+from service.expense_service import UpdateExpense
 from fastapi import APIRouter, Depends
 
 from dependencies.get_user import get_user

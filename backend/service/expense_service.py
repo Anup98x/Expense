@@ -54,12 +54,13 @@ class ExpenseService:
         items=list(expenses),
     )
 
-        async def update_expense_service(
+    async def update_expense_service(
               self,
               expense_id:UUID,
               data:UpdateExpense,
               user:User
               ):
+
          expense=await self.repo.get_expense_by_id(expense_id) #fetching id
          if not expense or expense.user_id!=user.id:
               raise HTTPException(status_code=400,detail="Expense not found")
