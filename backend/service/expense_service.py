@@ -26,7 +26,7 @@ class ExpenseService:
         return expenses
 
 
-    async def get_expenses(
+    async def get_expenses( #used for filtering
         self,
         user: User,
         category: CategoryEnum | None = None,
