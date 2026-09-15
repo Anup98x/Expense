@@ -51,7 +51,7 @@ class ExpenseService:
         total=total,
         page=page,
         page_size=page_size,
-        items=expenses,
+        items=list(expenses),
     )
 
         async def update_expense_service(
