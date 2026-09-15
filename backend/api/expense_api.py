@@ -3,15 +3,17 @@
 
 
 
+from datetime import datetime
 from typing import Annotated
 from uuid import UUID
+from backend.model.expense import CategoryEnum
 from service.expense_service import UpdateExpense
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 
 from dependencies.get_user import get_user
 from dependencies.service_factory import get_expense_service
 from model.user import User
-from schema.expense_schema import ExpenseCreate, SingleExpense, UpdateExpense
+from schema.expense_schema import ExpenseCreate, PaginatedExpenses, SingleExpense, UpdateExpense
 from service.expense_service import ExpenseService
 
 
@@ -53,3 +55,26 @@ async def delete_expense_endpoint(
 
     await service.delete_expense_service(expense_id,  user)
     return "Expense deleted successfully"
+
+@expense_api.get("/",response_model=PaginatedExpenses)
+async def list_expenses(
+    category: CategoryEnum | None = Query(None),
+    min_amount: float | None = Query(None, ge=0),
+    max_amount: float | None = Query(None, ge=0),
+    start_date: datetime | None = Query(None),
+    end_date: datetime | None = Query(None),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(10, ge=1, le=100),
+    service: ExpenseService = Depends(get_expense_service),
+    user: User = Depends(get_user),
+):
+     return await service.get_expenses(
+        user=user,
+        category=category,
+        min_amount=min_amount,
+        max_amount=max_amount,
+        start_date=start_date,
+        end_date=end_date,
+        page=page,
+        page_size=page_size,
+    )
