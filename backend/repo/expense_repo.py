@@ -77,7 +77,7 @@ class ExpenseRepo:
         #Executes the actual expense query
 
         return expenses, total # we also retunrs total becuase the frontend needs to know how many expenses exits
-    # 47/10= 4.7~5 so There are 47 expenses, 10 per page, so I need to show 5 pages."
+    # 47/10= 4.7~5 so There are 47 expenses, 10 per page, so I need to show 5 pages!"
 
     async def update_expense(self,expense:Expense,data:UpdateExpense):
         for key,value in data.model_dump(exclude_unset=True).items():

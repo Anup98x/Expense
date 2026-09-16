@@ -1,11 +1,12 @@
 
 
 
-
+from sqlalchemy import DateTime, func
 from datetime import datetime
 from enum import Enum
 from unicodedata import category
-from sqlalchemy import Enum as sqlEnum, ForeignKey
+from click import DateTime
+from sqlalchemy import DATETIME, Enum as sqlEnum, ForeignKey
 
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
@@ -29,7 +30,11 @@ class Expense(Base): #this Base makes class a database table
     title:Mapped[str] #mapped column is used for extra setting of columns
     description:Mapped[str | None]
     amount:Mapped[float]
-    created_at:Mapped[datetime]=mapped_column(default=datetime.utcnow)
+
+    created_at: Mapped[datetime] = mapped_column(
+        default=func.now(),
+
+    )
     category:Mapped[CategoryEnum]=mapped_column(sqlEnum(CategoryEnum),default=CategoryEnum.OTHERS)
     user_id:Mapped[UUID]=mapped_column(ForeignKey("Users.id",ondelete="CASCADE")) #here we are selecting user id as foreign key and using cascade to delete all expense when the user is deleted
     user:Mapped[User]=relationship("User",backref="expenses")
