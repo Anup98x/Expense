@@ -109,6 +109,7 @@ export default function ExpensePage() {
     });
   };
   const resetFilters = () => {
+    // used for filtering
     setCategory("");
     setMinAmount("");
     setMaxAmount("");
