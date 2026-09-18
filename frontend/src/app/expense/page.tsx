@@ -74,6 +74,7 @@ export default function ExpensePage() {
     }
   };
   useEffect(() => {
+    // to fetch expense from backend localhost:8000
     fetchExpenses();
   }, [page, category, minAmount, maxAmount, startDate, endDate]);
   const filteredExpenses = useMemo(() => {
