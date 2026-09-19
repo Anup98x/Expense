@@ -110,7 +110,7 @@ export default function ExpensePage() {
       params.append("page_size", pageSize.toString());
 
       const res = await fetch(
-        `http://localhost:8000/expense/?${params.toString()}`,
+        `http://localhost:8000/expense/?${params.toString()}`, // converts the parameters to strings (i.e json format haru lai)
         {
           method: "GET",
           credentials: "include",
