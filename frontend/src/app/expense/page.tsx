@@ -83,7 +83,8 @@ export default function ExpensePage() {
       setLoading(true);
       setError("");
 
-      const params = new URLSearchParams();
+      const params = new URLSearchParams(); // params is used in url to filter i.e /expense?category=trek&minamount=1000?/ it is called query parameter
+      // path parameter :http://localhost:8000/expense/(somevalue)
 
       if (category) {
         params.append("category", category);
