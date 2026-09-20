@@ -160,6 +160,7 @@ export default function ExpensePage() {
         credentials: "include",
 
         body: JSON.stringify({
+          //stringify converts the json object i.e title,amount,.... into formatted text (so now it is a clean text string that can travel safely across the internet to your backend)
           title: newExpense.title,
           description: newExpense.description,
           amount: Number(newExpense.amount),
