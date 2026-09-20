@@ -118,6 +118,7 @@ export default function ExpensePage() {
       );
 
       if (!res.ok) {
+        //if response if not or false
         throw new Error("Failed to fetch expenses");
       }
 
