@@ -233,7 +233,7 @@ export default function ExpensePage() {
       setError("");
 
       const res = await fetch(
-        `http://localhost:8000/expense/${editingExpense.id}`,
+        `http://localhost:8000/expense/${editingExpense.id}`, //fetch using expense id
         {
           method: "PATCH",
 
