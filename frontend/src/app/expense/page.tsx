@@ -122,7 +122,7 @@ export default function ExpensePage() {
         throw new Error("Failed to fetch expenses");
       }
 
-      const data: ExpenseResponse = await res.json();
+      const data: ExpenseResponse = await res.json(); // converts the raw response "res" into json
 
       setExpenses(data.items);
       setTotal(data.total);
