@@ -83,8 +83,7 @@ export default function ExpensePage() {
       setLoading(true);
       setError("");
 
-      const params = new URLSearchParams(); // params is used in url to filter i.e /expense?category=trek&minamount=1000?/ it is called query parameter
-      // path parameter :http://localhost:8000/expense/(somevalue)
+      const params = new URLSearchParams();
 
       if (category) {
         params.append("category", category);
@@ -110,7 +109,7 @@ export default function ExpensePage() {
       params.append("page_size", pageSize.toString());
 
       const res = await fetch(
-        `http://localhost:8000/expense/?${params.toString()}`, // converts the parameters to strings (i.e json format haru lai)
+        `http://localhost:8000/expense/?${params.toString()}`,
         {
           method: "GET",
           credentials: "include",
@@ -118,11 +117,10 @@ export default function ExpensePage() {
       );
 
       if (!res.ok) {
-        //if response if not or false
         throw new Error("Failed to fetch expenses");
       }
 
-      const data: ExpenseResponse = await res.json(); // converts the raw response "res" into json
+      const data: ExpenseResponse = await res.json();
 
       setExpenses(data.items);
       setTotal(data.total);
@@ -161,7 +159,6 @@ export default function ExpensePage() {
         credentials: "include",
 
         body: JSON.stringify({
-          //stringify converts the json object i.e title,amount,.... into formatted text (so now it is a clean text string that can travel safely across the internet to your backend)
           title: newExpense.title,
           description: newExpense.description,
           amount: Number(newExpense.amount),
@@ -234,7 +231,7 @@ export default function ExpensePage() {
       setError("");
 
       const res = await fetch(
-        `http://localhost:8000/expense/${editingExpense.id}`, //fetch using expense id
+        `http://localhost:8000/expense/${editingExpense.id}`,
         {
           method: "PATCH",
 
