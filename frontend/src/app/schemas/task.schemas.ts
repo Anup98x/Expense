@@ -6,5 +6,5 @@ export const taskSchema = z.object({
   status: z.enum(["todo", "in-progress", "done"]),
 });
 
-// Type is generated FROM the schema, so they can never drift apart
+// Type is generated FROM the schemas, so they can never drift apart
 export type TaskFormValues = z.infer<typeof taskSchema>;
