@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
 export function QueryProvider({ children }: { children: React.ReactNode }) {
-  // useState ensures one client per browser sessions
+  // useState ensures  that one client per browser sessions
   const [client] = useState(
     () =>
       new QueryClient({
