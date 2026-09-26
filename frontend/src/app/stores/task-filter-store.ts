@@ -8,7 +8,7 @@ interface TaskFilterState {
   setStatus: (status: TaskStatus | "all") => void;
   reset: () => void;
 }
-// using this function
+// using this functions
 export const useTaskFilterStore = create<TaskFilterState>((set) => ({
   search: "",
   status: "all",
