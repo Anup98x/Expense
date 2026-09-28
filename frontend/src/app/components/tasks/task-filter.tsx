@@ -14,7 +14,7 @@ export function TaskFilters() {
       <input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search tasks..."
+        placeholder="Search tasks....."
         className="border rounded px-3 py-2 flex-1"
       />
 
