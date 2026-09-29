@@ -1,5 +1,5 @@
-import { z } from "zod";
-
+import { z } from "zod"; //imported from zod
+//zod is the single source of truth for validation
 export const taskSchema = z.object({
   title: z.string().min(3, "Title must be at least 3 characters"),
   description: z.string().max(200, "Max 200 characters").optional(),
