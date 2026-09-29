@@ -69,7 +69,7 @@ export default function ExpensePage() {
   });
 
   // =========================
-  // UPDATE EXPENSE
+  // UPDATE EXPENSES
   // =========================
 
   const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
