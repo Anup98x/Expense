@@ -1,4 +1,4 @@
-import type { TaskStatus } from "@/types/task";
+import type { TaskStatus } from "@/app/types/task";
 import { create } from "zustand";
 
 interface TaskFilterState {
