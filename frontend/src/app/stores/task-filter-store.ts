@@ -8,7 +8,7 @@ interface TaskFilterState {
   setStatus: (status: TaskStatus | "all") => void;
   reset: () => void;
 }
-
+// zustand helps like a shared looker room to directly share things to zustand without prop drilling
 export const useTaskFilterStore = create<TaskFilterState>((set) => ({
   search: "",
   status: "all",
