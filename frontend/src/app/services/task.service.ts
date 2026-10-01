@@ -1,4 +1,4 @@
-import { api } from "@/lib/api";
+import { api } from "@/app/lib/api";
 import type { TaskFormValues } from "@/app/schemas/task.schemas";
 import type { Task } from "@/app/types/task";
 
