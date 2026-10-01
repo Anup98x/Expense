@@ -1,6 +1,6 @@
 import { api } from "@/lib/api";
-import type { TaskFormValues } from "@/schemas/task.schema";
-import type { Task } from "@/types/task";
+import type { TaskFormValues } from "@/app/schemas/task.schemas";
+import type { Task } from "@/app/types/task";
 
 export interface TaskFilters {
   search?: string;
