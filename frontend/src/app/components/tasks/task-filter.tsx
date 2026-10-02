@@ -1,6 +1,6 @@
 "use client";
 
-import { useTaskFilterStore } from "@/stores/task-filter.store";
+import { useTaskFilterStore } from "@/app/stores/task-filter-store";
 
 export function TaskFilters() {
   const search = useTaskFilterStore((s) => s.search);
