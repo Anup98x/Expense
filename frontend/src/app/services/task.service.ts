@@ -6,18 +6,18 @@ export interface TaskFilters {
   search?: string;
   status?: string;
 }
-
+//fetching expense id
 export const taskService = {
   getAll: async (filters: TaskFilters = {}) => {
     const { data } = await api.get<Task[]>("/tasks", { params: filters });
     return data;
   },
-
+  //creating expense id
   create: async (payload: TaskFormValues) => {
     const { data } = await api.post<Task>("/tasks", payload);
     return data;
   },
-
+  // to remove expense id
   remove: async (id: string) => {
     await api.delete(`/tasks/${id}`);
   },
