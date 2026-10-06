@@ -1,5 +1,5 @@
 import { taskService, type TaskFilters } from "@/app/services/task.service";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"; //these are all the core tools imported from tanstack query=which acts as the smart notebook once data is fetched from backend it saves of copy as cache for any other uses
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"; //these are all the core tools imported from tanstack query=which acts as the smart notebook once data is fetched from backend it saves of copy as cache for any other uses so it will be easy to re use components
 
 // Centralized keys so you never mistype them
 export const taskKeys = {
