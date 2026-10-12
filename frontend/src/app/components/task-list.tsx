@@ -2,7 +2,7 @@
 
 import { useTasks } from "@/app/hooks/use-tasks";
 import { useTaskFilterStore } from "@/app/stores/task-filter-store";
-import { TaskCard } from "./tasks/task-filter";
+import { TaskFilters } from "./tasks/task-filter";
 
 export function TaskList() {
   const search = useTaskFilterStore((s) => s.search);
